@@ -57,3 +57,11 @@ export function removeFromCart(productId){
   /*let index = cart.findIndex(cartItem => cartItem.productId === productId);
   if(index !== -1) cart.splice(index,1);*/
 }
+
+export function calculateCartQuantity(){
+  let cartQuantity = 0;
+  cart.forEach((cartItem) => {
+    cartQuantity += cartItem.quantity;
+  });
+  return cartQuantity;
+}
