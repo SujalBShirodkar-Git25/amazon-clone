@@ -38,7 +38,7 @@ export function calculateDeliveryDate(deliveryOption){
   let {deliveryDays} = deliveryOption;
   let count = 0;
   while(deliveryDays!==0){
-    let day = today.add(++count,'days');
+    let day = today.add(++count,'days').format('dddd');
     deliveryDays = isWeekend(day) ? deliveryDays : deliveryDays-1;
   }
   const deliveryDate = today.add(count,'days');
