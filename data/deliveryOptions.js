@@ -28,20 +28,20 @@ export function getDeliveryOption(deliveryOptionId){
   return deliveryOption || deliveryOptions[0];
 }
 
-function isWeekend(day){
+/*function isWeekend(day){
   if(day==='Saturday' || day==='Sunday') return true;
   else return false;
-}
+}*/
 
 export function calculateDeliveryDate(deliveryOption){
   const today = dayjs();
   let {deliveryDays} = deliveryOption;
-  let count = 0;
+  /*let count = 0;
   while(deliveryDays!==0){
     let day = today.add(++count,'days').format('dddd');
     deliveryDays = isWeekend(day) ? deliveryDays : deliveryDays-1;
-  }
-  const deliveryDate = today.add(count,'days');
+  }*/
+  const deliveryDate = today.add(deliveryDays,'days');
   const dateString = deliveryDate.format('dddd, MMMM D');
   return dateString;
 }

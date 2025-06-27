@@ -6,12 +6,10 @@ import {cart} from '../data/cart.js';
 
 async function loadPage(){
   try{
-    await loadProductsFetch();
-    const value = await new Promise((resolve,reject) => {
-      cart.loadCart(() => {
-        resolve('value3');
-      });
-    });
+    await Promise.all([
+      loadProductsFetch(),
+      cart.loadCartFetch()
+    ]);
   }
   catch(error){
     console.log('Unexpected error. Please try again later.');

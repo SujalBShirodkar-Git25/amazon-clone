@@ -58,6 +58,29 @@ class Cart{
     this.saveToStorage();
   }
 
+  addToCartOrders(productId,quantity){
+    let matchingItem;
+    this.cartItems.forEach((cartItem) => {
+      if(productId === cartItem.productId){
+        matchingItem = cartItem;
+      }
+    });
+
+    if(matchingItem){
+      matchingItem.quantity += quantity;
+    }
+    else{
+      const deliveryOptionId = '1';
+      this.cartItems.push({
+        productId,
+        quantity,
+        deliveryOptionId
+      });
+    }
+
+    this.saveToStorage();
+  }
+
   removeFromCart(productId){
     const newCart = [];
 
@@ -120,6 +143,17 @@ class Cart{
 
     xhr.open('GET','https://supersimplebackend.dev/cart');
     xhr.send();
+  }
+
+  async loadCartFetch(){
+    const response = await fetch('https://supersimplebackend.dev/cart');
+    const text = await response.text();
+    console.log(text);
+  }
+
+  resetCart(){
+    this.cartItems = [];
+    this.saveToStorage();
   }
 }
 
