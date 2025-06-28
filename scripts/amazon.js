@@ -1,8 +1,8 @@
 import {cart} from '../data/cart.js';
-import {loadProducts,products} from '../data/products.js';
+import {loadProductsFetch,products} from '../data/products.js';
 import renderAmazonHeader from './amazonHeader.js';
 
-loadProducts(renderProductsGrid);
+loadProductsFetch(renderProductsGrid);
 renderAmazonHeader();
 
 function renderProductsGrid(){
