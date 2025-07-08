@@ -17,16 +17,79 @@
     <link rel="stylesheet" href="styles/shared/general.css">
     <link rel="stylesheet" href="styles/shared/amazon-header.css">
     <link rel="stylesheet" href="styles/pages/amazon.css">
+
+    <style>
+      .disclaimer-container{
+        position: fixed;
+        z-index: 999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: none;
+      }
+      .disclaimer{
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 8px;
+        text-align: center;
+        max-width: 500px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      }
+      .disclaimer-button{
+        margin-top: 1rem;
+        padding: 10px 20px;
+        font-weight: bold;
+        background-color: #0073e6;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .show-disclaimer-container{
+        display: flex;
+      }
+    </style>
+
   </head>
   <body>
     <div class="amazon-header js-amazon-header">
     </div>
     
+    <div class="disclaimer-container">
+      <div class="disclaimer">
+        <h2>DISCLAIMER</h2>
+        <p>
+          THIS PAGE WAS MADE AS A PERSONAL EDUCATIONAL PROJECT. This is NOT the official site of the company or brand identified on the page. The creator of this page is NOT affiliated with the company or brand in any way. This page is a personal project made in connection with an educational exercise.
+        </p>
+        <button class="disclaimer-button">I Understand</button>
+      </div>
+    </div>
+
     <div class="main">
       <div class="products-grid js-products-grid">
       </div>
     </div>
 
     <script type="module" src="scripts/amazon.js"></script>
+    <script>
+      let count = JSON.parse(localStorage.getItem('disclaimer')) || 0;
+
+      const disclaimerContainer = document.querySelector('.disclaimer-container');
+      const disclaimerButton = document.querySelector('.disclaimer-button');
+
+      if(!count) disclaimerContainer.classList.add('show-disclaimer-container');
+
+      disclaimerButton.addEventListener('click', () => {
+        disclaimerContainer.classList.remove('show-disclaimer-container');
+        count++;
+        localStorage.setItem('disclaimer', JSON.stringify(count));
+      });
+    </script>
   </body>
 </html>
